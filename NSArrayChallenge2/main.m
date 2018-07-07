@@ -8,10 +8,47 @@
 
 #import <Foundation/Foundation.h>
 
-int main(int argc, const char * argv[]) {
+int main (int argc, const char * argv[])
+{
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        // Read in words file as a huge string (ignoring the possibility of an error)
+        NSString *wordsString =
+        [NSString stringWithContentsOfFile:@"/usr/share/dict/words"
+                                  encoding:NSUTF8StringEncoding
+                                     error:NULL];
+        // Break it into an array of strings
+        NSArray *words = [wordsString componentsSeparatedByString:@"\n"];
+        
+ //-------------------------------------------------------------------------------------
+        // Read in proper names file as a huge string (ignoring the possibility of an error)
+        NSString *nameString =
+        [NSString stringWithContentsOfFile:@"/usr/share/dict/propernames"
+                                  encoding:NSUTF8StringEncoding
+                                     error:NULL];
+        // Break it into an array of strings
+        NSArray *names = [nameString componentsSeparatedByString:@"\n"];
+        
+ //--------------------------------------------------------------------------------------
+        
+        // Go through the array one string at a time
+        for (NSString *n in words) {
+            
+            // Look for the string "aa" in a case-insensitive manner
+            NSRange r = [n rangeOfString:@"AA" options:NSCaseInsensitiveSearch];
+            
+            // Was it found?
+            if (r.location != NSNotFound) {
+                NSLog(@"%@", n);
+            }
+        }
+        
     }
     return 0;
 }
+
+//first pull in the words dictionary into an array
+//then pull in the proper names dictionary into an array
+//compare the two to pull out the words that are not Proper names by case sensitive search into new array notProper
+//( if properNames array location 1 = words location 1 then add to notProper array at next location)
+//if PN location 2 = word location 1 then
+//compare proper to not proper for matches and add to new array
