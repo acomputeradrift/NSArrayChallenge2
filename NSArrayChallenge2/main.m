@@ -26,25 +26,30 @@ int main (int argc, const char * argv[])
                                   encoding:NSUTF8StringEncoding
                                      error:NULL];
         // Break it into an array of strings
+    
         NSArray *names = [nameString componentsSeparatedByString:@"\n"];
         
  //--------------------------------------------------------------------------------------
-        //[myArray objectAtIndex:i]
+        //create an mutable array with only non proper names
+        
+        NSMutableArray *commonall = [NSMutableArray array];
+        [commonall addObjectsFromArray:words];
+        [commonall removeObjectsInArray:names];
+        
+ //-------------------------------------------------------------------------------------------
         // Go through the array one string at a time
         
-        for (NSString *n in words) {
-              // NSLog(@"%@", n);
-            if ([n isEqual:names[0]])
+        for (NSString *w in commonall)
+        {
+            for (NSString *n in names)
             {
-            NSLog(@"We have a match: %@ with %@", n, names[0]);
-             
-            // Look for the string "aa" in a case-insensitive manner
-            //NSRange r = [n rangeOfString:((void)("%@"), names) options:NSCaseInsensitiveSearch];
-            }
-            else {
-                NSLog(@"%@ and %@ do not match", n, names[0]);
+                if ([w caseInsensitiveCompare:n] == NSOrderedSame)
+                {
+                    NSLog(@"Name:%@ = word:%@", n, w);
+                }
             }
         }
+
         
             }
      return 0;
