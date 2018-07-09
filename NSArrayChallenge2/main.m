@@ -29,22 +29,29 @@ int main (int argc, const char * argv[])
         NSArray *names = [nameString componentsSeparatedByString:@"\n"];
         
  //--------------------------------------------------------------------------------------
-        
+        //[myArray objectAtIndex:i]
         // Go through the array one string at a time
+        
         for (NSString *n in words) {
-            
+              // NSLog(@"%@", n);
+            if ([n isEqual:names[0]])
+            {
+            NSLog(@"We have a match: %@ with %@", n, names[0]);
+             
             // Look for the string "aa" in a case-insensitive manner
-            NSRange r = [n rangeOfString:@"AA" options:NSCaseInsensitiveSearch];
-            
-            // Was it found?
-            if (r.location != NSNotFound) {
-                NSLog(@"%@", n);
+            //NSRange r = [n rangeOfString:((void)("%@"), names) options:NSCaseInsensitiveSearch];
+            }
+            else {
+                NSLog(@"%@ and %@ do not match", n, names[0]);
             }
         }
         
-    }
-    return 0;
-}
+            }
+     return 0;
+        }
+
+
+
 
 //first pull in the words dictionary into an array
 //then pull in the proper names dictionary into an array
