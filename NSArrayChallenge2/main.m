@@ -39,6 +39,8 @@ int main (int argc, const char * argv[])
  //-------------------------------------------------------------------------------------------
         // Go through the array one string at a time
         
+        int count = 0;
+        
         for (NSString *w in commonall)
         {
             for (NSString *n in names)
@@ -46,10 +48,12 @@ int main (int argc, const char * argv[])
                 if ([w caseInsensitiveCompare:n] == NSOrderedSame)
                 {
                     NSLog(@"Name:%@ = word:%@", n, w);
+                   
+                    count = count +1;
                 }
             }
         }
-
+        NSLog(@"count = %i", count);
         
             }
      return 0;
